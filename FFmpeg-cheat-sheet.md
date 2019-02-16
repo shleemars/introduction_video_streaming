@@ -93,3 +93,8 @@ ffmpeg -i input.mp4
 https://gist.github.com/mrbar42/ae111731906f958b396f30906004b3fa
 
 
+HLS live streaming in linux
+---
+```
+ffmpeg -f v4l2 -i /dev/video0 -pix_fmt yuv420p -c:a aac -ar 48000 -c:v h264 -profile:v main -crf 20 -sc_threshold 0 -g 60 -keyint_min 60 -hls_time 4 -hls_playlist_type event -vf scale=w=640:h=360:force_original_aspect_ratio=decrease -b:v 800k -maxrate 856k -bufsize 1200k -b:a 96k -hls_segment_filename segment_%03d.ts live.m3u8 
+```
